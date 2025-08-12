@@ -610,7 +610,7 @@
         <h2 class="section-title">Contact Me</h2>
         <p class="lead">Got a question, a project, or just want to say hi? Drop a message or connect via the links below.</p>
 
-        <form id="contactForm" class="contact-form" novalidate>
+        <form id="contactForm" action="https://formspree.io/f/maypvwjd" method="POST" class="contact-form">
           <div class="form-row">
             <div class="form-field">
               <label for="name">Name</label>
@@ -703,8 +703,9 @@
       // Contact form (basic client-side validation + fake submit)
       const form = document.getElementById('contactForm');
       if (form) {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
           e.preventDefault();
+      
           const name = document.getElementById('name');
           const email = document.getElementById('email');
           const message = document.getElementById('message');
@@ -712,25 +713,39 @@
           const errEmail = document.getElementById('errEmail');
           const errMessage = document.getElementById('errMessage');
           const success = document.getElementById('formSuccess');
-
-          // Reset
+      
+          // Reset errors
           [errName, errEmail, errMessage].forEach(n => n.textContent = '');
           success.textContent = '';
-
+      
           let valid = true;
           if (!name.value.trim()) { errName.textContent = 'Please enter your name.'; valid = false; }
           if (!email.value.trim() || !/^\S+@\S+\.\S+$/.test(email.value)) { errEmail.textContent = 'Please enter a valid email.'; valid = false; }
           if (!message.value.trim()) { errMessage.textContent = 'Please enter a message.'; valid = false; }
-
+      
           if (!valid) return;
-
-          // Simulate submit
-          setTimeout(() => {
-            success.textContent = 'Thanks! Your message has been sent.';
-            form.reset();
-          }, 300);
+      
+          // Send to Formspree via AJAX
+          try {
+            const formData = new FormData(form);
+            const response = await fetch(form.action, {
+              method: 'POST',
+              body: formData,
+              headers: { 'Accept': 'application/json' }
+            });
+      
+            if (response.ok) {
+              success.textContent = '✅ Thanks! Your message has been sent.';
+              form.reset();
+            } else {
+              success.textContent = '❌ Oops! There was a problem sending your message.';
+            }
+          } catch (error) {
+            success.textContent = '⚠ Network error. Please try again later.';
+          }
         });
       }
+
     })();
   </script>
 </body>
