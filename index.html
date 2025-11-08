@@ -312,6 +312,7 @@
     }
   </style>
   <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
 <body>
   <!-- Skip to content for accessibility -->
@@ -453,88 +454,102 @@
 
     <!-- PROJECTS -->
     <section id="projects" class="section projects">
-      <div class="container">
-        <h2 class="section-title">Projects</h2>
-        <div class="grid cards">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+
+    <!-- Swiper container -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+
+        <!-- PROJECT 1 -->
+        <div class="swiper-slide">
           <article class="card proj">
-            
             <h3>Coder Buddy</h3>
-            <p class="muted">AI-driven multi-agent web app builder that generates complete apps from natural language prompts with resilient model orchestration.</p>
+            <p class="muted">
+              AI-driven multi-agent web app builder that generates complete apps from natural language prompts with resilient model orchestration.
+            </p>
             <ul class="tags">
               <li>Python</li><li>LangGraph</li><li>Groq LLMs</li><li>AI Agents</li><li>Streamlit</li>
             </ul>
             <div class="card-actions">
-              <a class="btn tiny" href="https://codingpartner-nakul.streamlit.app/" aria-disabled="true">Link</a>
-              
+              <a class="btn tiny" href="https://codingpartner-nakul.streamlit.app/" target="_blank">Link</a>
             </div>
           </article>
+        </div>
 
-          <!-- <article class="card proj">
-            <h3>CampusConnects</h3>
-            <p class="muted">Event management web app for colleges: discover, RSVP, and manage events seamlessly with full-stack implementation.</p>
-            <ul class="tags">
-              <li>Django</li><li>Python</li><li>JavaScript</li><li>SQLite</li>
-            </ul>
-            <div class="card-actions">
-              <a class="btn tiny" href="https://github.com/nakuluttarkar/campusConnects" aria-disabled="true">Github</a>
-              
-            </div>
-          </article> -->
-
+        <!-- PROJECT 2 -->
+        <div class="swiper-slide">
           <article class="card proj">
-            
             <h3>NutriAI</h3>
-            <p class="muted">AI chatbot for baby health & nutrition guidance; focuses on safe, verifiable answers using advanced prompt engineering.</p>
+            <p class="muted">
+              AI chatbot for baby health & nutrition guidance; focuses on safe, verifiable answers using advanced prompt engineering.
+            </p>
             <ul class="tags">
               <li>AI Agent</li><li>Prompt Eng.</li><li>LLMs</li><li>Python</li><li>FastAPI</li><li>Kotlin</li>
             </ul>
             <div class="card-actions">
-              <a class="btn tiny" href="https://github.com/nakuluttarkar/nutri_ai_bot" aria-disabled="true">Github</a>
-              
+              <a class="btn tiny" href="https://github.com/nakuluttarkar/nutri_ai_bot" target="_blank">Github</a>
             </div>
           </article>
+        </div>
 
+        <!-- PROJECT 3 -->
+        <div class="swiper-slide">
           <article class="card proj">
-            
             <h3>Fake News Categorizer</h3>
-            <p class="muted">Fake or Factual News Prediction: Uses a CountVectorizer to create a bag-of-words representation of the text data and trains Logistic Regression and SGDClassifier models to predict whether a news article is fake or factual.</p>
+            <p class="muted">
+              Uses NLP and ML models (Logistic Regression, SGDClassifier) to predict fake or factual news using bag-of-words features.
+            </p>
             <ul class="tags">
               <li>NLP</li><li>Python</li><li>ML</li><li>Logistic Regression</li><li>SGDClassifier</li>
             </ul>
             <div class="card-actions">
-              <a class="btn tiny" href="https://github.com/nakuluttarkar/Fake-news-categorizer/" aria-disabled="true">Github</a>
-              
+              <a class="btn tiny" href="https://github.com/nakuluttarkar/Fake-news-categorizer/" target="_blank">Github</a>
             </div>
           </article>
-          
+        </div>
+
+        <!-- PROJECT 4 -->
+        <div class="swiper-slide">
           <article class="card proj">
-            
             <h3>AI Interview Assistant</h3>
-            <p class="muted">AI-powered HR interview simulator that conducts adaptive interviews and generates automated feedback with performance scoring.</p>
+            <p class="muted">
+              AI-powered HR interview simulator that conducts adaptive interviews and generates automated feedback with performance scoring.
+            </p>
             <ul class="tags">
               <li>Python</li><li>OpenAI</li><li>GPT-4o</li><li>Streamlit JS Eval</li>
             </ul>
             <div class="card-actions">
-              <a class="btn tiny" href="https://ai-interview-tool-prototype.streamlit.app/" aria-disabled="true">Link</a>
-              
+              <a class="btn tiny" href="https://ai-interview-tool-prototype.streamlit.app/" target="_blank">Link</a>
             </div>
           </article>
+        </div>
 
+        <!-- PROJECT 5 -->
+        <div class="swiper-slide">
           <article class="card proj">
-            
-            <h3>CIFAR-10 Image Classification (Deep Learning Model)</h3>
-            <p class="muted">CNN model built from scratch on CIFAR-10, achieving 86.4% accuracy (12% over baseline) with data augmentation, regularization, and GPU-optimized training for 3× faster performance and deployment readiness.</p>
+            <h3>CIFAR-10 Image Classification</h3>
+            <p class="muted">
+              CNN model trained on CIFAR-10 dataset achieving 86.4% accuracy (12% over baseline) with augmentation, regularization, and GPU optimization.
+            </p>
             <ul class="tags">
               <li>Python</li><li>PyTorch</li><li>CNN</li><li>Google Colab</li>
             </ul>
             <div class="card-actions">
-              <a class="btn tiny" href="https://github.com/nakuluttarkar/cifar10-pytorch-image-classifier" aria-disabled="true">Link</a>
-              
+              <a class="btn tiny" href="https://github.com/nakuluttarkar/cifar10-pytorch-image-classifier" target="_blank">Link</a>
             </div>
           </article>
         </div>
       </div>
-    </section>
+
+      <!-- Swiper Pagination and Navigation -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+</section>
+
 
     <!-- SKILLS -->
     <section id="skills" class="section skills">
