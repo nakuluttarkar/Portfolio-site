@@ -238,7 +238,7 @@ async function callLLM(provider, systemPrompt, userMessage, retryCount = 0) {
 
     try {
         // Call the secure Netlify function
-        const response = await fetch('/.netlify/functions/chat', {
+        const response = await fetch('/api/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
