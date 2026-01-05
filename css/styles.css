@@ -1180,7 +1180,7 @@ a:hover {
 }
 
 .chatbot-toggle {
-    width: 70px;
+    width: 65px;
     height: 70px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -1194,7 +1194,7 @@ a:hover {
     transition: var(--transition);
     position: relative;
     z-index: 1000;
-    animation: pulse-shadow 2s infinite;
+    animation: pulse-shadow 5s infinite;
 }
 
 .chatbot-toggle svg {
