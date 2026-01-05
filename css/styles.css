@@ -1180,7 +1180,7 @@ a:hover {
 }
 
 .chatbot-toggle {
-    width: 65px;
+    width: 60px;
     height: 70px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--primary), var(--accent));

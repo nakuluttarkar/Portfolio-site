@@ -233,11 +233,15 @@ let chatbotState = {
 // LLM API Call with Fallback
 // ================================
 
-async function callLLM(provider, systemPrompt, userMessage, retryCount = 0) {
+// ================================
+// LLM API Call with Fallback
+// ================================
+
+async function callLLM(provider, messages, retryCount = 0) {
     const maxRetries = 2;
 
     try {
-        // Call the secure Netlify function
+        // Call the secure Netlify/Vercel function
         const response = await fetch('/api/chat', {
             method: 'POST',
             headers: {
@@ -245,10 +249,7 @@ async function callLLM(provider, systemPrompt, userMessage, retryCount = 0) {
             },
             body: JSON.stringify({
                 provider: provider,
-                messages: [
-                    { role: 'system', content: systemPrompt },
-                    { role: 'user', content: userMessage }
-                ]
+                messages: messages
             })
         });
 
@@ -265,7 +266,7 @@ async function callLLM(provider, systemPrompt, userMessage, retryCount = 0) {
             const nextProvider = fallbackOrder[(currentIndex + 1) % fallbackOrder.length];
 
             console.log(`Falling back from ${provider} to ${nextProvider}...`);
-            return await callLLM(nextProvider, systemPrompt, userMessage, retryCount + 1);
+            return await callLLM(nextProvider, messages, retryCount + 1);
         }
 
         if (data.error) {
@@ -284,7 +285,7 @@ async function callLLM(provider, systemPrompt, userMessage, retryCount = 0) {
             const nextProvider = fallbackOrder[(currentIndex + 1) % fallbackOrder.length];
 
             console.log(`Falling back from ${provider} to ${nextProvider}...`);
-            return await callLLM(nextProvider, systemPrompt, userMessage, retryCount + 1);
+            return await callLLM(nextProvider, messages, retryCount + 1);
         }
 
         throw new Error('All LLM providers failed. Please try again later or contact me directly at nakul.uttarkar@gmail.com');
@@ -359,7 +360,7 @@ async function sendChatMessage() {
     sendButton.disabled = true;
     chatbotState.isLoading = true;
 
-    // Add user message
+    // Add user message to state
     addMessage('user', userMessage);
     showLoading();
 
@@ -380,11 +381,23 @@ Important guidelines:
 Context about Nakul:
 ${context}`;
 
+        // Construct message history (last 10 messages)
+        // Filter out any previous system messages from history to avoid duplication, though our state only has user/assistant
+        const history = chatbotState.messages.slice(0, -1).slice(-10).map(msg => ({
+            role: msg.role === 'user' ? 'user' : 'assistant',
+            content: msg.content
+        }));
+
+        const messages = [
+            { role: 'system', content: systemPrompt },
+            ...history,
+            { role: 'user', content: userMessage }
+        ];
+
         // Call LLM with fallback
         const response = await callLLM(
             chatbotState.currentProvider,
-            systemPrompt,
-            userMessage
+            messages
         );
 
         // Remove loading and add response
